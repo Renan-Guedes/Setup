@@ -2,9 +2,13 @@
 :root {
     --background: 224 71% 4%;
     --foreground: 213 31% 91%;
-    --primary: #4f46e5;
+    --primary: 263 70% 50%;
     --primary-hover: #4338ca;
     --border: 215 25% 27%;
+    --card: 224 71% 4%;
+    --muted: 215 25% 27%;
+    --muted-foreground: 218 11% 65%;
+    --success: 142 69% 58%;
 }
 
 /* ====== Reset básico ====== */
@@ -14,6 +18,7 @@
     box-sizing: border-box;
 }
 
+/* ====== Gerais ====== */
 body {
     font-family: "Segoe UI", Roboto, sans-serif;
     background-color: hsl(var(--background));
@@ -28,18 +33,34 @@ body {
 }
 
 .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+}
+
+.card-title {
+    font-size: 0.875rem;
+    font-weight: 500;
 }
 
 .card-content {
     padding: 0.5rem 1.5rem 1.5rem 1.5rem;
 }
 
-/* ====== Container principal ====== */
+.card-gradient {
+    background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--success) / 0.1));
+}
+
+/* ====== Containers ====== */
 .container {
+    min-height: 100vh;
+    padding: 1.5rem;
+}
+
+.container-content {
     max-width: 92rem;
     margin: 0 auto;
-    padding: 20px;
 }
 
 /* ====== Apresentação ====== */
@@ -76,9 +97,6 @@ body {
 }
 
 /* ====== Galeria ====== */
-.gallery {
-    padding: 2rem;
-}
 
 .gallery h2 {
     margin-bottom: 1.5rem;
@@ -101,6 +119,32 @@ body {
 
 .gallery-item:hover {
     transform: scale(1.05);
+}
+
+/* ====== Cards de Resumo ====== */
+#total-expenses {
+    color: hsl(var(--primary));
+}
+
+#used-expenses, #utilization {
+    color: hsl(var(--success));
+}
+
+.resume-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 2rem;
+}
+
+.resume-cost {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.resume-description {
+    font-size: 0.75rem;
+    color: hsl(var(--muted-foreground));
 }
 
 /* Modal */

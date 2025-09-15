@@ -1,48 +1,105 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Setup - Renan Guedes</title>
     <link rel="stylesheet" href="style.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
+      <div class="container-content">
         <!-- Header / Apresentação -->
         <section class="presentation">
-            <img src="./assets/images/perfil.png" alt="Foto de Renan Guedes" class="profile-photo">
-            <div class="presentation-text">
-                <h1>Renan Guedes</h1>
-                <a href="https://renanguedes.com/" target="_blank" rel="noopener noreferrer">renanguedes.com</a>
-            </div>
+          <img
+            src="./assets/images/perfil.png"
+            alt="Foto de Renan Guedes"
+            class="profile-photo"
+          />
+          <div class="presentation-text">
+            <h1>Renan Guedes</h1>
+            <a
+              href="https://renanguedes.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >renanguedes.com</a
+            >
+          </div>
         </section>
 
         <!-- Galeria de Fotos -->
         <section id="galeria" class="gallery">
-            <div class="card">
-                <div class="card-header">
-                    <h2>Galeria de Fotos</h2>
-                </div>
-                <div class="card-content">
-                    <div class="gallery-grid">
-                        <img src="./assets/images/setup.jpg" alt="Setup" class="gallery-item">
-                        <img src="./assets/images/game.jpg" alt="Game" class="gallery-item">
-                        <img src="./assets/images/products.jpg" alt="Produtos" class="gallery-item">
-                    </div>
-                </div>
+          <div class="card">
+            <div class="card-header">
+              <h2>Galeria de Fotos</h2>
             </div>
+            <div class="card-content">
+              <div class="gallery-grid">
+                <img
+                  src="./assets/images/setup.jpg"
+                  alt="Setup"
+                  class="gallery-item"
+                />
+                <img
+                  src="./assets/images/game.jpg"
+                  alt="Game"
+                  class="gallery-item"
+                />
+                <img
+                  src="./assets/images/products.jpg"
+                  alt="Produtos"
+                  class="gallery-item"
+                />
+              </div>
+            </div>
+          </div>
         </section>
-    </div>
 
-    <!-- Modal da galeria -->
-    <div id="galleryModal" class="modal">
+        <!-- Cards de Resumo -->
+        <div class="resume-grid">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Total de Gastos</div>
+            </div>
+            <div class="card-content">
+              <div id="total-expenses" class="resume-cost">R$0,00</div>
+              <p id="total-items" class="resume-description">
+                Nenhum produto cadastrado
+              </p>
+            </div>
+          </div>
+          <div class="card card-gradient">
+            <div class="card-header">
+              <div class="card-title">Gastos - Utilizando</div>
+            </div>
+            <div class="card-content">
+              <div id="used-expenses" class="resume-cost">R$0,00</div>
+              <p id="total-items" class="resume-description">
+                Nenhum produto cadastrado
+              </p>
+            </div>
+          </div>
+          <div class="card card-gradient">
+            <div class="card-header">
+              <div class="card-title">Utilização</div>
+            </div>
+            <div class="card-content">
+              <div id="utilization" class="resume-cost">0%</div>
+              <p id="total-items" class="resume-description">
+                Porcentagem de Uso
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal da galeria -->
+      <div id="galleryModal" class="modal">
         <span class="close">&times;</span>
-        <img class="modal-content" id="modalImage" alt="Imagem ampliada">
+        <img class="modal-content" id="modalImage" alt="Imagem ampliada" />
+      </div>
     </div>
-
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>
