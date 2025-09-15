@@ -1,9 +1,10 @@
 /* ====== Variáveis globais ====== */
 :root {
-    --background: #0f0f0f;
-    --foreground: #f5f5f5;
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
     --primary: #4f46e5;
     --primary-hover: #4338ca;
+    --border: 215 25% 27%;
 }
 
 /* ====== Reset básico ====== */
@@ -15,9 +16,23 @@
 
 body {
     font-family: "Segoe UI", Roboto, sans-serif;
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
     line-height: 1.5;
+}
+
+/* ====== Cards ====== */
+.card {
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.5rem;
+}
+
+.card-header {
+    padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+}
+
+.card-content {
+    padding: 0.5rem 1.5rem 1.5rem 1.5rem;
 }
 
 /* ====== Container principal ====== */
@@ -58,4 +73,62 @@ body {
 .presentation-text a:hover {
     color: var(--primary-hover);
     text-decoration: underline;
+}
+
+/* ====== Galeria ====== */
+.gallery {
+    padding: 2rem;
+}
+
+.gallery h2 {
+    margin-bottom: 1.5rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    justify-items: center;
+}
+
+.gallery-item {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    display: block;
+    max-width: 80%;
+    max-height: 80%;
+    margin: auto;
+    margin-top: 5%;
+    border-radius: 8px;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
 }
