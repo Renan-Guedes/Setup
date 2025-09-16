@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Setup - Renan Guedes</title>
+    <link
+      href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -56,48 +60,87 @@
           </div>
         </section>
 
+        <!-- Modal da galeria -->
+        <div id="galleryModal" class="modal">
+          <span class="close">&times;</span>
+          <img class="modal-content" id="modalImage" alt="Imagem ampliada" />
+        </div>
+
         <!-- Cards de Resumo -->
-        <div class="resume-grid">
+        <section id="resumo" class="resume">
+          <div class="resume-grid">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Total de Gastos</div>
+              </div>
+              <div class="card-content">
+                <div id="total-expenses" class="resume-cost">R$0,00</div>
+                <p id="total-items" class="resume-description">
+                  Nenhum produto cadastrado
+                </p>
+              </div>
+            </div>
+            <div class="card card-gradient">
+              <div class="card-header">
+                <div class="card-title">Gastos - Utilizando</div>
+              </div>
+              <div class="card-content">
+                <div id="used-expenses" class="resume-cost">R$0,00</div>
+                <p id="total-items" class="resume-description">
+                  Nenhum produto cadastrado
+                </p>
+              </div>
+            </div>
+            <div class="card card-gradient">
+              <div class="card-header">
+                <div class="card-title">Utilização</div>
+              </div>
+              <div class="card-content">
+                <div id="utilization" class="resume-cost">0%</div>
+                <p id="total-items" class="resume-description">
+                  Porcentagem de Uso
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tabela -->
+        <section id="tabela" class="table">
           <div class="card">
             <div class="card-header">
-              <div class="card-title">Total de Gastos</div>
+              <h2>Detalhes do Setup</h2>
             </div>
             <div class="card-content">
-              <div id="total-expenses" class="resume-cost">R$0,00</div>
-              <p id="total-items" class="resume-description">
-                Nenhum produto cadastrado
-              </p>
+              <div class="table-container">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Produto</th>
+                      <th>Marca</th>
+                      <th>Modelo</th>
+                      <th>Tipo</th>
+                      <th>Descrição</th>
+                      <th>Loja</th>
+                      <th>Link</th>
+                      <th>Data da Compra</th>
+                      <th>Valor</th>
+                      <th>Frete</th>
+                      <th>Taxa</th>
+                      <th>Total</th>
+                      <th>Em uso</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tableBody"></tbody>
+                </table>
+              </div>
+              <div class="no-results hidden" id="tableNoResults">
+                <p>Nenhum produto encontrado.</p>
+              </div>
             </div>
           </div>
-          <div class="card card-gradient">
-            <div class="card-header">
-              <div class="card-title">Gastos - Utilizando</div>
-            </div>
-            <div class="card-content">
-              <div id="used-expenses" class="resume-cost">R$0,00</div>
-              <p id="total-items" class="resume-description">
-                Nenhum produto cadastrado
-              </p>
-            </div>
-          </div>
-          <div class="card card-gradient">
-            <div class="card-header">
-              <div class="card-title">Utilização</div>
-            </div>
-            <div class="card-content">
-              <div id="utilization" class="resume-cost">0%</div>
-              <p id="total-items" class="resume-description">
-                Porcentagem de Uso
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Modal da galeria -->
-      <div id="galleryModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="modalImage" alt="Imagem ampliada" />
+        </section>
       </div>
     </div>
     <script src="script.js"></script>
