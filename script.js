@@ -1,5 +1,6 @@
 // ===================== DADOS =====================
-const dados = [{
+const dados = [
+  {
     id: 1,
     nomeProduto: "Braço Articulado",
     marca: "B2T",
@@ -403,6 +404,29 @@ const dados = [{
 
 let dadosFiltrados = [...dados];
 
+// ===================== GALERIA =====================
+const galleryItems = document.querySelectorAll(".gallery-item");
+const modal = document.getElementById("galleryModal");
+const modalImage = document.getElementById("modalImage");
+const closeModal = document.querySelector(".close");
+
+galleryItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    modal.style.display = "block";
+    modalImage.src = item.src;
+  });
+});
+
+closeModal.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
 // ===================== TABELA =====================
 const tableBody = document.getElementById("tableBody");
 const tableNoResults = document.getElementById("tableNoResults");
@@ -411,7 +435,7 @@ const tableNoResults = document.getElementById("tableNoResults");
 function formatCurrency(value) {
   return value.toLocaleString("pt-BR", {
     style: "currency",
-    currency: "BRL"
+    currency: "BRL",
   });
 }
 
@@ -423,7 +447,10 @@ function formatDate(dateString) {
 
 // Normaliza tipo (remove acentos e lower)
 function normalizeTipo(tipo) {
-  return String(tipo || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  return String(tipo || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 }
 
 // --- Badge por Tipo ---
@@ -489,9 +516,15 @@ function RenderizarTabela(lista) {
         </td>
         <td class="font-mono">${formatDate(item.dataCompra)}</td>
         <td class="font-mono">${formatCurrency(item.valor)}</td>
-        <td class="font-mono ${item.frete > 0 ? "text-danger font-bold" : ""}"">${formatCurrency(item.frete)}</td>
-        <td class="font-mono ${item.taxa > 0 ? "text-danger font-bold" : ""}">${formatCurrency(item.taxa)}</td>
-        <td class="font-mono font-bold text-info">${formatCurrency(item.custoTotal)}</td>
+        <td class="font-mono ${
+          item.frete > 0 ? "text-danger font-bold" : ""
+        }"">${formatCurrency(item.frete)}</td>
+        <td class="font-mono ${
+          item.taxa > 0 ? "text-danger font-bold" : ""
+        }">${formatCurrency(item.taxa)}</td>
+        <td class="font-mono font-bold text-info">${formatCurrency(
+          item.custoTotal
+        )}</td>
         <td>${
           item.utilizando
             ? "<i class='bx  bx-check-circle text-success'></i>"
@@ -503,30 +536,33 @@ function RenderizarTabela(lista) {
     });
 }
 
-// ===================== GALERIA =====================
-const galleryItems = document.querySelectorAll(".gallery-item");
-const modal = document.getElementById("galleryModal");
-const modalImage = document.getElementById("modalImage");
-const closeModal = document.querySelector(".close");
+// ===================== BARRA DE PESQUISA =====================
+function AplicarFiltro(termo) {
+  const q = String(termo || "")
+    .trim()
+    .toLowerCase();
+  dadosFiltrados = !q
+    ? [...dados]
+    : dados.filter((item) =>
+        [
+          item.nomeProduto,
+          item.marca,
+          item.modelo,
+          item.tipo,
+          item.descricao,
+          item.loja,
+        ].some((f) => (f || "").toString().toLowerCase().includes(q))
+      );
+  AtualizarInterface();
+}
 
-galleryItems.forEach((item) => {
-  item.addEventListener("click", () => {
-    modal.style.display = "block";
-    modalImage.src = item.src;
-  });
-});
-
-closeModal.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-
-window.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    modal.style.display = "none";
-  }
-});
+function AtualizarInterface() {
+  RenderizarTabela(dadosFiltrados);
+}
 
 // ===================== INICIALIZAÇÃO =====================
 document.addEventListener("DOMContentLoaded", () => {
-  RenderizarTabela(dadosFiltrados);
+  AtualizarInterface();
+  const searchInput = document.getElementById("searchInput");
+  searchInput.addEventListener("input", (e) => AplicarFiltro(e.target.value));
 });
