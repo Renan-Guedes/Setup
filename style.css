@@ -12,6 +12,8 @@
   --danger: 0 72% 51%;
   --warning: 38 92% 50%;
   --info: 217 91% 60%;
+  --input: 215 25% 27%;
+  --ring: 263 70% 50%;
 }
 
 /* ====== Reset básico ====== */
@@ -29,36 +31,39 @@ body {
   line-height: 1.5;
 }
 
+
+
 .hidden {
   display: none;
 }
 
 .font-mono {
-    font-family: ui-monospace, SFMono-Regular, Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+  font-family: ui-monospace, SFMono-Regular, Monaco, "Cascadia Code",
+    "Roboto Mono", Consolas, "Courier New", monospace;
 }
 
 .text-muted {
-    color: hsl(var(--muted-foreground));
+  color: hsl(var(--muted-foreground));
 }
 
 .text-danger {
-    color: hsl(var(--danger));
+  color: hsl(var(--danger));
 }
 
 .text-success {
-    color: hsl(var(--success));
+  color: hsl(var(--success));
 }
 
 .text-info {
-    color: hsl(var(--info));
+  color: hsl(var(--info));
 }
 
 .text-warning {
-    color: hsl(var(--warning));
+  color: hsl(var(--warning));
 }
 
 .font-bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 /* Botões */
@@ -77,10 +82,18 @@ body {
   text-decoration: none;
 }
 
-.btn-outline {
-  border-color: hsl(var(--border));
-  background-color: transparent;
-  color: hsl(var(--foreground));
+.btn-sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+}
+
+.btn-default {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.btn-default:hover {
+  background-color: hsl(var(--primary) / 0.9);
 }
 
 .btn-ghost {
@@ -253,6 +266,72 @@ body {
   color: hsl(var(--muted-foreground));
 }
 
+/* ====== Barra de Pesquisa ====== */
+#busca {
+  padding-top: 1.5rem;
+}
+
+.pt-6 {
+  padding-top: 1.5rem;
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.search-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-input-container {
+  position: relative;
+  flex: 1;
+  max-width: 24rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  background-color: hsl(var(--input));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.375rem;
+  color: hsl(var(--foreground));
+  font-size: 0.875rem;
+}
+
+.search-input::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: hsl(var(--muted-foreground));
+}
+
+.view-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.view-label {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+}
+
 /* ====== Tabela ====== */
 .table {
   margin-top: 2rem;
@@ -263,29 +342,29 @@ body {
 }
 
 .table-container {
-    overflow-x: auto;
+  overflow-x: auto;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-td{
-    font-size: 0.875rem;
+td {
+  font-size: 0.875rem;
 }
 
-th, td {
-    text-align: center;
-    padding: 0.75rem;
-    border-bottom: 1px solid hsl(var(--border));
+th,
+td {
+  text-align: center;
+  padding: 0.75rem;
+  border-bottom: 1px solid hsl(var(--border));
 }
 
 .tr-active {
-    background-color: hsl(var(--success) / 0.05);
+  background-color: hsl(var(--success) / 0.05);
 }
 
 .truncate {
-    white-space: nowrap;
+  white-space: nowrap;
 }
-
