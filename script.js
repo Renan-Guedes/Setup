@@ -404,33 +404,6 @@ const dados = [
 
 let dadosFiltrados = [...dados];
 
-// ===================== GALERIA =====================
-const galleryItems = document.querySelectorAll(".gallery-item");
-const modal = document.getElementById("galleryModal");
-const modalImage = document.getElementById("modalImage");
-const closeModal = document.querySelector(".close");
-
-galleryItems.forEach((item) => {
-  item.addEventListener("click", () => {
-    modal.style.display = "block";
-    modalImage.src = item.src;
-  });
-});
-
-closeModal.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-
-window.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    modal.style.display = "none";
-  }
-});
-
-// ===================== TABELA =====================
-const tableBody = document.getElementById("tableBody");
-const tableNoResults = document.getElementById("tableNoResults");
-
 // --- Formata Moeda ---
 function formatCurrency(value) {
   return value.toLocaleString("pt-BR", {
@@ -472,6 +445,57 @@ function gettipoColor(tipo) {
       return "badge-peripherals";
   }
 }
+
+// ===================== GALERIA =====================
+const galleryItems = document.querySelectorAll(".gallery-item");
+const modal = document.getElementById("galleryModal");
+const modalImage = document.getElementById("modalImage");
+const closeModal = document.querySelector(".close");
+
+galleryItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    modal.style.display = "block";
+    modalImage.src = item.src;
+  });
+});
+
+closeModal.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
+// ===================== CARDS DE RESUMO =====================
+function CalcularCards(data) {
+  const custoTotal = data.reduce((acc, item) => acc + Number(item.custoTotal || 0), 0);
+  const custoUtilizando = data.filter((item) => item.utilizando)
+    .reduce((acc, item) => acc + Number(item.custoTotal || 0), 0);
+  return {
+    custoTotal,
+    custoUtilizando
+  };
+}
+
+function RenderizarResumo() {
+  const summary = CalcularCards(dadosFiltrados);
+  const totalProdutos = dadosFiltrados.length;
+  const activeItems = dadosFiltrados.filter((item) => item.utilizando).length;
+  const porcentagemUtilizacao = totalProdutos > 0 ? Math.round((activeItems / totalProdutos) * 100) : 0;
+
+  document.getElementById("total-expenses").textContent = formatCurrency(summary.custoTotal);
+  document.getElementById("total-items").textContent = `Total de Produtos: ${totalProdutos}`;
+  document.getElementById("used-expenses").textContent = formatCurrency(summary.custoUtilizando);
+  document.getElementById("active-items").textContent = `${activeItems} itens em uso`;
+  document.getElementById("utilization").textContent = `${porcentagemUtilizacao}%`;
+}
+
+// ===================== TABELA =====================
+const tableBody = document.getElementById("tableBody");
+const tableNoResults = document.getElementById("tableNoResults");
 
 function RenderizarTabela(lista) {
   tableBody.innerHTML = "";
@@ -557,6 +581,7 @@ function AplicarFiltro(termo) {
 }
 
 function AtualizarInterface() {
+  RenderizarResumo();
   RenderizarTabela(dadosFiltrados);
 }
 
