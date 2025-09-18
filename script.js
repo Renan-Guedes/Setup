@@ -660,7 +660,7 @@ function RenderizarTabela(lista) {
     tableNoResults.classList.add("hidden");
   }
 
-  [...dadosFiltrados]
+  lista
     .sort((a, b) => {
       const dateA = new Date(a.dataCompra);
       const dateB = new Date(b.dataCompra);
@@ -675,45 +675,40 @@ function RenderizarTabela(lista) {
         <td class="font-bold">${item.nomeProduto}</td>
         <td class="text-muted">${item.marca}</td>
         <td>${item.modelo}</td>
-        <td><span class="badge ${gettipoColor(item.tipo)}">${
-        item.tipo
-      }</span></td>
-        <td><div class="truncate" title="${item.descricao}">${
-        item.descricao
-      }</div></td>
-        <td><span class="badge ${gettipoColor(item.loja)}">${
-        item.loja
-      }<span></td>
+        <td><span class="badge ${gettipoColor(item.tipo)}">${item.tipo}</span></td>
+        <td><div class="truncate" title="${item.descricao}">${item.descricao}</div></td>
+        <td><span class="badge ${gettipoColor(item.loja)}">${item.loja}<span></td>
         <td>
-          <button class="btn btn-ghost btn-icon" onclick="if('${
-            item.link
-          }' !== 'Link' && '${item.link}' !== 'Não disponível') window.open('${
-        item.link
-      }', '_blank')">
-            <i class='bx  bx-link'  ></i> 
+          <button class="btn btn-ghost btn-icon open-link" data-link="${item.link}">
+            <i class='bx bx-link'></i> 
           </button>
         </td>
         <td class="font-mono">${formatDate(item.dataCompra)}</td>
         <td class="font-mono">${formatCurrency(item.valor)}</td>
-        <td class="font-mono ${
-          item.frete > 0 ? "text-danger font-bold" : ""
-        }"">${formatCurrency(item.frete)}</td>
-        <td class="font-mono ${
-          item.taxa > 0 ? "text-danger font-bold" : ""
-        }">${formatCurrency(item.taxa)}</td>
-        <td class="font-mono font-bold text-info">${formatCurrency(
-          item.custoTotal
-        )}</td>
+        <td class="font-mono ${item.frete > 0 ? "text-danger font-bold" : ""}">${formatCurrency(item.frete)}</td>
+        <td class="font-mono ${item.taxa > 0 ? "text-danger font-bold" : ""}">${formatCurrency(item.taxa)}</td>
+        <td class="font-mono font-bold text-info">${formatCurrency(item.custoTotal)}</td>
         <td>${
           item.utilizando
-            ? "<i class='bx  bx-check-circle text-success'></i>"
-            : "<i class='bx  bx-x icon text-muted'></i> "
+            ? "<i class='bx bx-check-circle text-success'></i>"
+            : "<i class='bx bx-x icon text-muted'></i>"
         }</td>
       `;
 
       tableBody.appendChild(row);
     });
 }
+
+// ===================== EVENT LISTENER PARA ABRIR LINKS =====================
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".open-link");
+  if (!btn) return;
+
+  const link = btn.dataset.link;
+  if (link && link !== "Link" && link !== "Não disponível") {
+    window.open(link, "_blank");
+  }
+});
 
 function AtualizarInterface() {
   RenderizarResumo();
