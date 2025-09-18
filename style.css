@@ -4,6 +4,8 @@
   --foreground: 213 31% 91%;
   --primary: 263 70% 50%;
   --primary-hover: #4338ca;
+  --secondary: 215 25% 27%;
+  --secondary-foreground: 210 20% 98%;
   --border: 215 25% 27%;
   --card: 224 71% 4%;
   --muted: 215 25% 27%;
@@ -11,6 +13,7 @@
   --success: 142 69% 58%;
   --danger: 0 72% 51%;
   --warning: 38 92% 50%;
+  --warning-foreground: 224 71% 4%;
   --info: 217 91% 60%;
   --input: 215 25% 27%;
   --ring: 263 70% 50%;
@@ -385,4 +388,67 @@ td {
 
 .truncate {
   white-space: nowrap;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-essenciais {
+  background-color: hsl(var(--warning));
+  color: hsl(var(--warning-foreground));
+}
+
+.badge-monitor {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.badge-perifericos {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+.badge-moveis {
+  background-color: #695039;
+}
+
+.badge-audio {
+  background-color: hsl(var(--success));
+  color: hsl(var(--success-foreground));
+}
+
+.badge-aliexpress {
+  background-color: #dc3604;
+}
+
+.badge-kabum {
+  background-color: #3671ae;
+}
+
+.badge-terabyte {
+  background-color: #3e3e3e;
+}
+
+.badge-mercadolivre {
+  background-color: #fce252;
+  color: #000;
+}
+
+.badge-shopee {
+  background-color: #ee4d2d;
+}
+
+.badge-amazon {
+  background-color: #f1f1f1;
+  color: #000;
+}
+
+.badge-magalu {
+  background-color: #0086ff;
 }

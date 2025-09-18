@@ -431,18 +431,30 @@ function gettipoColor(tipo) {
   switch (normalizeTipo(tipo)) {
     case "perifericos":
     case "periféricos":
-      return "badge-peripherals";
+      return "badge-perifericos";
     case "essenciais":
-      return "badge-laptop";
+      return "badge-essenciais";
     case "moveis":
     case "móveis":
-      return "badge-furniture";
-    case "monitor":
-      return "badge-monitor";
+      return "badge-moveis";
     case "audio":
       return "badge-audio";
+    case "aliexpress":
+      return "badge-aliexpress";
+    case "kabum":
+      return "badge-kabum";
+    case "terabyte":
+      return "badge-terabyte";
+    case "mercado livre":
+      return "badge-mercadolivre";
+    case "shopee":
+      return "badge-shopee";
+    case "magalu":
+      return "badge-magalu";
+    case "amazon":
+      return "badge-amazon";
     default:
-      return "badge-peripherals";
+      return "badge-perifericos";
   }
 }
 
@@ -636,7 +648,9 @@ function RenderizarTabela(lista) {
         <td><div class="truncate" title="${item.descricao}">${
         item.descricao
       }</div></td>
-        <td>${item.loja}</td>
+        <td><span class="badge ${gettipoColor(item.loja)}">${
+          item.loja
+      }<span></td>
         <td>
           <button class="btn btn-ghost btn-icon" onclick="if('${
             item.link
