@@ -97,10 +97,25 @@
               </div>
               <div class="card-content">
                 <div id="utilization" class="resume-cost">0%</div>
-                <p class="resume-description">
-                  Porcentagem de Uso
-                </p>
+                <p class="resume-description">Porcentagem de Uso</p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Gráfico -->
+        <section id="grafico" class="chart pt-6">
+          <div class="card">
+            <div class="card-header">
+              <div class="grafico-header">Análise de Gastos</div>
+            </div>
+            <div class="card-content">
+              <div class="chart-container">
+                <canvas id="expenseChart"></canvas>
+              </div>
+              <p class="grafico-descricao text-muted">
+                Mostra o top 5 produtos com mais gastos
+              </p>
             </div>
           </div>
         </section>
@@ -136,9 +151,6 @@
                   <button class="btn btn-sm btn-default" id="tableViewBtn">
                     Tabela
                   </button>
-                  <!-- <button class="btn btn-sm btn-outline" id="cardsViewBtn">
-                    Cards
-                  </button> -->
                 </div>
               </div>
             </div>
@@ -183,6 +195,7 @@
         </section>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

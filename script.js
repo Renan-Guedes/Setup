@@ -471,12 +471,16 @@ window.addEventListener("click", (e) => {
 
 // ===================== CARDS DE RESUMO =====================
 function CalcularCards(data) {
-  const custoTotal = data.reduce((acc, item) => acc + Number(item.custoTotal || 0), 0);
-  const custoUtilizando = data.filter((item) => item.utilizando)
+  const custoTotal = data.reduce(
+    (acc, item) => acc + Number(item.custoTotal || 0),
+    0
+  );
+  const custoUtilizando = data
+    .filter((item) => item.utilizando)
     .reduce((acc, item) => acc + Number(item.custoTotal || 0), 0);
   return {
     custoTotal,
-    custoUtilizando
+    custoUtilizando,
   };
 }
 
@@ -484,13 +488,117 @@ function RenderizarResumo() {
   const summary = CalcularCards(dadosFiltrados);
   const totalProdutos = dadosFiltrados.length;
   const activeItems = dadosFiltrados.filter((item) => item.utilizando).length;
-  const porcentagemUtilizacao = totalProdutos > 0 ? Math.round((activeItems / totalProdutos) * 100) : 0;
+  const porcentagemUtilizacao =
+    totalProdutos > 0 ? Math.round((activeItems / totalProdutos) * 100) : 0;
 
-  document.getElementById("total-expenses").textContent = formatCurrency(summary.custoTotal);
-  document.getElementById("total-items").textContent = `Total de Produtos: ${totalProdutos}`;
-  document.getElementById("used-expenses").textContent = formatCurrency(summary.custoUtilizando);
-  document.getElementById("active-items").textContent = `${activeItems} itens em uso`;
-  document.getElementById("utilization").textContent = `${porcentagemUtilizacao}%`;
+  document.getElementById("total-expenses").textContent = formatCurrency(
+    summary.custoTotal
+  );
+  document.getElementById(
+    "total-items"
+  ).textContent = `Total de Produtos: ${totalProdutos}`;
+  document.getElementById("used-expenses").textContent = formatCurrency(
+    summary.custoUtilizando
+  );
+  document.getElementById(
+    "active-items"
+  ).textContent = `${activeItems} itens em uso`;
+  document.getElementById(
+    "utilization"
+  ).textContent = `${porcentagemUtilizacao}%`;
+}
+
+// ===================== GRÁFICO =====================
+let chart = null;
+
+function RenderizarGrafico() {
+  const ctx = document.getElementById("expenseChart").getContext("2d");
+  const chartData = [...dadosFiltrados]
+    .sort((a, b) => b.custoTotal - a.custoTotal)
+    .slice(0, 5);
+  const labels = chartData.map((item) => item.nomeProduto);
+  const costs = chartData.map((item) => item.custoTotal);
+  const colors = chartData.map((item) =>
+    item.utilizando ? "hsl(263,70%,50%)" : "hsl(215,25%,27%)"
+  );
+
+  if (chart) chart.destroy();
+
+  chart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [
+        {
+          label: "Custo Total",
+          data: costs,
+          backgroundColor: colors,
+          borderRadius: 4,
+          borderSkipped: false,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          callbacks: {
+            label: (context) => [
+              `Custo Total: ${formatCurrency(context.parsed.y)}`,
+              `Status: ${
+                chartData[context.dataIndex].utilizando
+                  ? "Em uso"
+                  : "Não está sendo utilizado"
+              }`,
+            ],
+          },
+        },
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: "#999",
+          },
+          grid: {
+            color: "#ccc",
+          },
+        },
+        y: {
+          ticks: {
+            color: "#999",
+            callback: (v) => formatCurrency(v),
+          },
+          grid: {
+            color: "#ccc",
+          },
+        },
+      },
+    },
+  });
+}
+
+// ===================== BARRA DE PESQUISA =====================
+function AplicarFiltro(termo) {
+  const q = String(termo || "")
+    .trim()
+    .toLowerCase();
+  dadosFiltrados = !q
+    ? [...dados]
+    : dados.filter((item) =>
+        [
+          item.nomeProduto,
+          item.marca,
+          item.modelo,
+          item.tipo,
+          item.descricao,
+          item.loja,
+        ].some((f) => (f || "").toString().toLowerCase().includes(q))
+      );
+  AtualizarInterface();
 }
 
 // ===================== TABELA =====================
@@ -560,28 +668,9 @@ function RenderizarTabela(lista) {
     });
 }
 
-// ===================== BARRA DE PESQUISA =====================
-function AplicarFiltro(termo) {
-  const q = String(termo || "")
-    .trim()
-    .toLowerCase();
-  dadosFiltrados = !q
-    ? [...dados]
-    : dados.filter((item) =>
-        [
-          item.nomeProduto,
-          item.marca,
-          item.modelo,
-          item.tipo,
-          item.descricao,
-          item.loja,
-        ].some((f) => (f || "").toString().toLowerCase().includes(q))
-      );
-  AtualizarInterface();
-}
-
 function AtualizarInterface() {
   RenderizarResumo();
+  RenderizarGrafico();
   RenderizarTabela(dadosFiltrados);
 }
 

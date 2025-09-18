@@ -31,8 +31,6 @@ body {
   line-height: 1.5;
 }
 
-
-
 .hidden {
   display: none;
 }
@@ -264,6 +262,26 @@ body {
 .resume-description {
   font-size: 0.75rem;
   color: hsl(var(--muted-foreground));
+}
+
+/* ====== Gráfico ====== */
+.grafico-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.chart-container {
+  height: 20rem;
+  width: 100%;
+  padding: 1rem;
+}
+
+.grafico-descricao {
+  font-size: 0.75rem;
+  margin-top: 4;
 }
 
 /* ====== Barra de Pesquisa ====== */
