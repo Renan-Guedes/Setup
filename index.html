@@ -40,16 +40,26 @@
             </div>
             <div class="card-content">
               <div class="gallery-grid">
-                <img
-                  src="./assets/images/setup.jpg"
-                  alt="Setup"
+                <video
                   class="gallery-item"
-                />
-                <img
-                  src="./assets/images/game.jpg"
-                  alt="Game"
+                  width="250"
+                  muted
+                  playsinline
+                  preload="metadata"
+                  data-src="assets/videos/setup.mp4"
+                >
+                  <source src="assets/videos/setup.mp4" type="video/mp4" />
+                </video>
+                <video
                   class="gallery-item"
-                />
+                  width="250"
+                  muted
+                  playsinline
+                  preload="metadata"
+                  data-src="assets/videos/setup2.mp4"
+                >
+                  <source src="assets/videos/setup2.mp4" type="video/mp4" />
+                </video>
                 <img
                   src="./assets/images/products.jpg"
                   alt="Produtos"
@@ -64,6 +74,7 @@
         <div id="galleryModal" class="modal">
           <span class="close">&times;</span>
           <img class="modal-content" id="modalImage" alt="Imagem ampliada" />
+          <video class="modal-content" id="modalVideo" controls></video>
         </div>
 
         <!-- Cards de Resumo -->

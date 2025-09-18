@@ -462,22 +462,55 @@ function gettipoColor(tipo) {
 const galleryItems = document.querySelectorAll(".gallery-item");
 const modal = document.getElementById("galleryModal");
 const modalImage = document.getElementById("modalImage");
+const modalVideo = document.getElementById("modalVideo");
 const closeModal = document.querySelector(".close");
 
 galleryItems.forEach((item) => {
   item.addEventListener("click", () => {
     modal.style.display = "block";
-    modalImage.src = item.src;
+
+    // Reset modal
+    modalImage.style.display = "none";
+    modalVideo.style.display = "none";
+    modalVideo.pause();
+    modalVideo.removeAttribute("src");
+
+    if (item.tagName === "IMG") {
+      // Se for imagem
+      modalImage.src = item.src;
+      modalImage.style.display = "block";
+    } else if (item.tagName === "VIDEO") {
+      // Se for vídeo
+      const videoSrc = item.getAttribute("data-src");
+      modalVideo.src = videoSrc;
+      modalVideo.style.display = "block";
+      modalVideo.play();
+    }
   });
 });
 
+// Fechar no X
 closeModal.addEventListener("click", () => {
   modal.style.display = "none";
+  modalVideo.pause();
+  modalVideo.removeAttribute("src");
 });
 
+// Fechar clicando fora
 window.addEventListener("click", (e) => {
   if (e.target === modal) {
     modal.style.display = "none";
+    modalVideo.pause();
+    modalVideo.removeAttribute("src");
+  }
+});
+
+// Fechar com ESC
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && modal.style.display === "block") {
+    modal.style.display = "none";
+    modalVideo.pause();
+    modalVideo.removeAttribute("src");
   }
 });
 
@@ -649,7 +682,7 @@ function RenderizarTabela(lista) {
         item.descricao
       }</div></td>
         <td><span class="badge ${gettipoColor(item.loja)}">${
-          item.loja
+        item.loja
       }<span></td>
         <td>
           <button class="btn btn-ghost btn-icon" onclick="if('${
