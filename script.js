@@ -721,4 +721,9 @@ document.addEventListener("DOMContentLoaded", () => {
   AtualizarInterface();
   const searchInput = document.getElementById("searchInput");
   searchInput.addEventListener("input", (e) => AplicarFiltro(e.target.value));
+
+  const videos = document.querySelectorAll("video");
+  videos.forEach(video => {
+    video.volume = 0.1; // define volume inicial como 10%
+  });
 });
